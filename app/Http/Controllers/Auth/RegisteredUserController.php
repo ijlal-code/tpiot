@@ -41,6 +41,9 @@ class RegisteredUserController extends Controller
         ]);
 
         // 2. Memberikan role default secara otomatis (Auto Assign Role)
+        // Set context Tim ke ID 1 sebelum memberikan role
+        setPermissionsTeamId(1); 
+        
         // Pastikan role 'user' sudah ada di database melalui Seeder
         $user->assignRole('user');
 

@@ -13,13 +13,29 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                        @role('user')
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <x-nav-link :href="route('my-iot-devices.index')" :active="request()->routeIs('my-iot-devices*')">
+                {{ __('Perangkat Saya') }}
+            </x-nav-link>
+        </div>
+
+    @endrole
+
                     {{-- Menu Khusus Admin (Desktop) --}}
                     @role('admin')
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users*')">
                         {{ __('Pengguna') }}
                     </x-nav-link>
-                    @endrole
+
                 </div>
+                
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('iot-devices.index')" :active="request()->routeIs('iot-devices*')">
+                    {{ __('Perangkat') }}
+                </x-nav-link>
+            </div>
+        @endrole
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">

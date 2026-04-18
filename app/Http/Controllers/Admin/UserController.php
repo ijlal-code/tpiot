@@ -37,4 +37,12 @@ class UserController extends Controller
 
         return view('admin.user.index');
     }
+    public function destroy($id)
+{
+    $user = \App\Models\User::findOrFail($id);
+    $user->delete();
+
+    return redirect()->route('users.index')
+        ->with('success', 'User berhasil dihapus');
+}
 }
