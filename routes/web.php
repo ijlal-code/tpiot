@@ -11,7 +11,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'role:admin')->group(function () {
     // Resource route untuk CRUD User dengan proteksi role admin
     Route::resource('users', UserController::class)->middleware('role:admin');
     
