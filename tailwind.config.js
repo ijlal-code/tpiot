@@ -8,6 +8,19 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
+    // Menjamin class tetap ada meskipun tidak tertulis langsung di file Blade
+    safelist: [
+        'bg-blue-500',
+        'bg-blue-700',
+        'bg-gray-500',
+        'bg-gray-700',
+        'bg-red-500',
+        'bg-red-700',
+        'bg-cyan-500',
+        'bg-cyan-700',
+        'bg-yellow-500',
+        'bg-yellow-600'
+    ],
 
     theme: {
         extend: {

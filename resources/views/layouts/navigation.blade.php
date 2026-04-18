@@ -16,6 +16,15 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                    {{-- Menu Navigasi Khusus Admin --}}
+    @role('admin')
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users*')">
+                {{ __('Pengguna') }}
+            </x-nav-link>
+        </div>
+    @endrole
             </div>
 
             <!-- Settings Dropdown -->
