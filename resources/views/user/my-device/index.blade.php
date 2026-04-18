@@ -41,6 +41,7 @@
                                         class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-black/50 text-white backdrop-blur-sm rounded">
                                         IoT Device
                                     </span>
+                                    
                                 </div>
                             </div>
 
