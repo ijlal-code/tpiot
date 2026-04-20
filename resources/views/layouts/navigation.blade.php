@@ -38,6 +38,7 @@
         @endrole
             </div>
 
+            
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
