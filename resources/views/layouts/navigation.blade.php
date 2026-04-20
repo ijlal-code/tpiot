@@ -1,6 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
+            
             <div class="flex">
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -13,32 +14,25 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                        @role('user')
-        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('my-iot-devices.index')" :active="request()->routeIs('my-iot-devices*')">
-                {{ __('Perangkat Saya') }}
-            </x-nav-link>
-        </div>
+                    {{-- Menu Khusus User --}}
+                    @role('user')
+                        <x-nav-link :href="route('my-iot-devices.index')" :active="request()->routeIs('my-iot-devices*')">
+                            {{ __('Perangkat Saya') }}
+                        </x-nav-link>
+                    @endrole
 
-    @endrole
-
-                    {{-- Menu Khusus Admin (Desktop) --}}
+                    {{-- Menu Khusus Admin --}}
                     @role('admin')
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users*')">
-                        {{ __('Pengguna') }}
-                    </x-nav-link>
-
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users*')">
+                            {{ __('Pengguna') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('iot-devices.index')" :active="request()->routeIs('iot-devices*')">
+                            {{ __('Perangkat') }}
+                        </x-nav-link>
+                    @endrole
                 </div>
-                
-            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <x-nav-link :href="route('iot-devices.index')" :active="request()->routeIs('iot-devices*')">
-                    {{ __('Perangkat') }}
-                </x-nav-link>
-            </div>
-        @endrole
             </div>
 
-            
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -83,10 +77,20 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
+            {{-- Menu Khusus User (Mobile) --}}
+            @role('user')
+            <x-responsive-nav-link :href="route('my-iot-devices.index')" :active="request()->routeIs('my-iot-devices*')">
+                {{ __('Perangkat Saya') }}
+            </x-responsive-nav-link>
+            @endrole
+
             {{-- Menu Khusus Admin (Mobile) --}}
             @role('admin')
             <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users*')">
                 {{ __('Pengguna') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('iot-devices.index')" :active="request()->routeIs('iot-devices*')">
+                {{ __('Perangkat') }}
             </x-responsive-nav-link>
             @endrole
         </div>
