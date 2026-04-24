@@ -31,13 +31,22 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'nim' => ['required', 'string', 'max:20'],
+        'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);
+
+        $photoPath = null;
+    if ($request->hasFile('photo')) {
+        $photoPath = $request->file('photo')->store('profile-photos', 'public');
+    }
 
         // 1. Membuat data user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'nim' => $request->nim,
+            'photo' => $photoPath,
         ]);
 
         // 2. Memberikan role default secara otomatis (Auto Assign Role)

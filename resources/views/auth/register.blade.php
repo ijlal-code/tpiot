@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}" class="space-y-4">
+    <form method="POST" action="{{ route('register') }}" class="space-y-4" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-6">
@@ -23,6 +23,18 @@
             <x-input-error :messages="$errors->get('email')" class="mt-1 text-red-600" />
         </div>
 
+        <div class="mt-4">
+        <x-input-label for="nim" :value="__('NIM')" />
+        <x-text-input id="nim" class="block mt-1 w-full" type="text" name="nim" :value="old('nim')" required />
+        <x-input-error :messages="$errors->get('nim')" class="mt-2" />
+    </div>
+
+    <div class="mt-4">
+        <x-input-label for="photo" :value="__('Foto Profil (Opsional)')" />
+        <input id="photo" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="file" name="photo" accept="image/*" />
+        <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+    </div>
+
         <div>
             <label for="password" class="block text-sm font-medium text-stone-700 mb-1">Kata Sandi</label>
             <input id="password" type="password" name="password" required autocomplete="new-password" 
@@ -44,6 +56,8 @@
                 Buat Akun
             </button>
         </div>
+
+        
 
         <div class="text-center mt-4">
             <p class="text-sm text-stone-500">Sudah terdaftar? 

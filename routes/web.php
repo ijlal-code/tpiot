@@ -18,6 +18,7 @@ Route::get('/dashboard', function () {
        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/additional', [ProfileController::class, 'updateAdditional'])->name('profile.additional.update');
 
     // Route untuk pengguna melihat perangkatnya sendiri
     Route::resource('my-iot-devices', MyIotDeviceController::class)

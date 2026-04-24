@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -22,7 +23,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information.
+     * Update the user's profile information (Hanya Name & Email).
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
@@ -33,6 +34,37 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Update the user's additional information (Hanya NIM & Foto).
+     */
+    public function updateAdditional(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+        
+        // Validasi NIM dan Photo
+        $request->validate([
+            'nim' => ['required', 'string', 'max:20'],
+            'photo' => ['nullable', 'image', 'max:2048'],
+        ]);
+
+        // Update NIM
+        $user->nim = $request->nim;
+
+        // Logika Update Foto
+        if ($request->hasFile('photo')) {
+            // Hapus foto lama dari storage jika ada
+            if ($user->photo) {
+                Storage::disk('public')->delete($user->photo);
+            }
+            // Simpan foto baru
+            $user->photo = $request->file('photo')->store('profile-photos', 'public');
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

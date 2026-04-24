@@ -56,11 +56,17 @@
                             <div class="p-6 sm:p-8 flex items-center space-x-6 sm:space-x-8">
                                 
                                 <div class="flex-shrink-0">
-                                   
+                                    @if(auth()->user()->photo)
+                                        {{-- Jika user SUDAH mengunggah foto profil --}}
                                         <img class="h-24 w-24 sm:h-32 sm:w-32 rounded-full border-4 border-gray-400 object-cover shadow-inner bg-white" 
-                                             src="{{ asset('assets/images/foto.png') }}" 
-                                             alt="Foto Default">
-                                  
+                                             src="{{ asset('storage/' . auth()->user()->photo) }}" 
+                                             alt="Foto Profil {{ auth()->user()->name }}">
+                                    @else
+                                        {{-- Jika user BELUM mengunggah foto profil, gunakan Avatar Inisial --}}
+                                        <img class="h-24 w-24 sm:h-32 sm:w-32 rounded-full border-4 border-gray-400 object-cover shadow-inner bg-white" 
+                                             src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=random&color=fff&size=128" 
+                                             alt="Avatar {{ auth()->user()->name }}">
+                                    @endif
                                 </div>
                                 <div class="text-white">
                                     <p class="text-xs sm:text-sm uppercase tracking-widest text-gray-400 font-semibold mb-1">Kartu Identitas Mahasiswa</p>
@@ -69,7 +75,7 @@
                                     <div class="mt-4 bg-gray-700/50 rounded p-3 inline-block">
                                         <p class="text-sm sm:text-base text-gray-300">
                                             <span class="font-semibold text-gray-400">NIM:</span> 
-                                            {{ auth()->user()->nim ?? 'D0223038' }}
+                                            {{ auth()->user()->nim ?? 'Belum Diatur' }}
                                         </p>
                                     </div>
                                 </div>
