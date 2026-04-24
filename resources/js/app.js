@@ -1,12 +1,13 @@
-import axios from 'axios';
-window.axios = axios;
+// resources/js/app.js
 
+import axios from 'axios';
+import Alpine from 'alpinejs';
+import './echo'; // Pastikan file echo.js ada di folder yang sama
+
+// 1. Konfigurasi Axios
+window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allow your team to quickly build robust real-time web applications.
- */
-
-import './echo'; // tambahkan ini
+// 2. Konfigurasi Alpine.js untuk fitur dropdown & interaktivitas UI
+window.Alpine = Alpine;
+Alpine.start();
